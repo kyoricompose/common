@@ -96,6 +96,8 @@ services:
       - /dev/px4video3:/dev/px4video3
       - /dev/bus/usb/:/dev/bus/usb/
     volumes:
+      - /usr/local/lib/libarib25.so.0:/usr/local/lib/libarib25.so.0
+      - /usr/local/bin/recpt1:/usr/local/bin/recpt1
       - /var/run/:/var/run/
       - /var/lib/mirakurun/data:/app-data
     environment:
