@@ -19,6 +19,6 @@ services:
       service: mastodon
     environment:
       DB_POOL: 30
-    command: bundle exec sidekiq -c $${DB_POOL}
+    command: sh -c "bundle exec sidekiq -c $${DB_POOL}"
     tty: true
     restart: always
