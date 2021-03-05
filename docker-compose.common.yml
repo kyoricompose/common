@@ -10,3 +10,8 @@ services:
       - ./Caddyfile.mastodon:/etc/caddy/Caddyfile:ro
     environment:
       MASTODON_DOMAIN: example.com
+
+  mastodon-backup:
+    image: kyori/docker-mastodon-backup:psql-12.5-redis-4.0.9
+    tty: true
+    restart: always
