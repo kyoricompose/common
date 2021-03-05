@@ -73,3 +73,38 @@ services:
       - /var/lib/grafana:/var/lib/grafana
     tty: true
     restart: always
+
+  mysql:
+    image: mariadb:10.5
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+    environment:
+      TZ: Asia/Tokyo
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --performance-schema=false --expire_logs_days=1
+    tty: true
+    restart: always
+
+  mirakurun:
+    image: chinachu/mirakurun:latest
+    cap_add:
+      - SYS_ADMIN
+      - SYS_NICE
+    devices:
+      - /dev/px4*:/dev/
+      - /dev/bus/usb/:/dev/bus/usb/
+    volumes:
+      - /var/lib/mirakurun/data:/app-data
+    environment:
+      TZ: Asia/Tokyo
+    tty: true
+    restart: always
+  epgstation:
+    image: kyori/epgstation:latest
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/lib/epgstation:/app/data
+      - /var/log/epgstation:/app/logs
+    environment:
+      TZ: Asia/Tokyo
+    tty: true
+    restart: always
