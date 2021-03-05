@@ -1,0 +1,39 @@
+{
+  order realip first
+  default_sni {$APP_HOST}
+}
+
+{$APP_HOST} {
+  log {
+    output stdout
+  }
+
+  tls /certs/{$CERT_NAME}.crt /certs/{$CERT_NAME}.key
+
+  route {
+    encode zstd gzip
+
+    header {
+      Strict-Transport-Security "max-age=31536000"
+    }
+
+    realip {
+      header "X-Forwarded-For"
+      from cloudflare
+      maxhops 5
+      strict true
+    }
+
+    reverse_proxy  {
+      to http://{$REVERSE_TO}
+
+      header_up X-Forwarded-Port 443
+      header_up X-Forwarded-Proto https
+
+      transport http {
+        keepalive 5s
+        keepalive_idle_conns 10
+      }
+    }
+  }
+}

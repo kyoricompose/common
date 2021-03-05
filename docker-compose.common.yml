@@ -3,6 +3,15 @@ services:
     image: kyori/caddy-realip:latest
     tty: true
     restart: always
+  caddy-common:
+    extends:
+      service: caddy
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    environment:
+      APP_HOST: example.com
+      CERT_NAME: example.com
+      REVERSE_TO: app:3000
   caddy-mastodon:
     extends:
       service: caddy
@@ -13,5 +22,10 @@ services:
 
   mastodon-backup:
     image: kyori/docker-mastodon-backup:psql-12.5-redis-4.0.9
+    tty: true
+    restart: always
+
+  wol-proxy:
+    image: kyori/wol-proxy:latest
     tty: true
     restart: always
