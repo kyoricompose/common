@@ -1,14 +1,14 @@
 {
   order realip first
-  default_sni {env.MASTODON_DOMAIN}
+  default_sni {$MASTODON_DOMAIN}
 }
 
-{env.MASTODON_DOMAIN} {
+{$MASTODON_DOMAIN} {
   log {
     output stdout
   }
 
-  tls /certs/{env.MASTODON_DOMAIN}.crt /certs/{env.MASTODON_DOMAIN}.key
+  tls /certs/{$MASTODON_DOMAIN}.crt /certs/{$MASTODON_DOMAIN}.key
 
   route {
     @streaming {
