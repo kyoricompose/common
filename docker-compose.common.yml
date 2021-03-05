@@ -1,0 +1,12 @@
+services:
+  caddy:
+    image: kyori/caddy-realip:latest
+    tty: true
+    restart: always
+  caddy-mastodon:
+    extends:
+      service: caddy
+    volumes:
+      - ./Caddyfile.mastodon:/etc/caddy/Caddyfile:ro
+    environment:
+      MASTODON_DOMAIN: example.com
