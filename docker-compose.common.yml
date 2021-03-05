@@ -102,7 +102,7 @@ services:
       - /var/lib/mirakurun/data:/app-data
     environment:
       TZ: Asia/Tokyo
-    command: sh -c "ldconfig && ./docker/container-init.sh"
+    command: /bin/bash -c "ldconfig && ./docker/container-init.sh"
     tty: true
     restart: always
   epgstation:
