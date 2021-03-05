@@ -29,3 +29,47 @@ services:
     image: kyori/wol-proxy:latest
     tty: true
     restart: always
+
+  prometheus:
+    image: prom/prometheus:v2.25.0
+    volumes:
+      - /var/lib/prometheus:/prometheus
+    tty: true
+    restart: always
+  alertmanager:
+    image: prom/alertmanager:v0.20.0
+    volumes:
+      - /var/lib/alertmanager:/alertmanager
+    tty: true
+    restart: always
+  alertmanager-discord:
+    image: maxsuelmarinho/alertmanager-discord:latest
+    tty: true
+    restart: always
+  node-exporter:
+    image: prom/node-exporter:v1.1.2
+    volumes:
+      - '/:/host:ro,rslave'
+    pid: host
+    command: --path.rootfs=/host
+    tty: true
+    restart: always
+  blackbox-exporter:
+    image: prom/blackbox-exporter:v0.18.0
+    volumes:
+      - ./blackbox_exporter.yml:/etc/blackbox_exporter/config.yml:ro
+    tty: true
+    restart: always
+  statsd-exporter:
+    image: prom/statsd-exporter:v0.20.0
+    volumes:
+      - ./mastodon-statsd-mapping.yml:/etc/statsd_exporter/mapping.yml:ro
+    command: --statsd.mapping-config=/etc/statsd_exporter/mapping.yml
+    tty: true
+    restart: always
+  grafana:
+    image: grafana/grafana:7.4.3
+    volumes:
+      - /var/lib/grafana:/var/lib/grafana
+    tty: true
+    restart: always
