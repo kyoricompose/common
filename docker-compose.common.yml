@@ -90,7 +90,10 @@ services:
       - SYS_ADMIN
       - SYS_NICE
     devices:
-      - /dev/px4*:/dev/
+      - /dev/px4video0:/dev/px4video0
+      - /dev/px4video1:/dev/px4video1
+      - /dev/px4video2:/dev/px4video2
+      - /dev/px4video3:/dev/px4video3
       - /dev/bus/usb/:/dev/bus/usb/
     volumes:
       - /var/run/:/var/run/
