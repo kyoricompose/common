@@ -118,3 +118,5 @@ services:
     restart: always
   lemokon:
     image: kyori/lemokon:latest-epgstation-discord
+    tty: true
+    restart: always
