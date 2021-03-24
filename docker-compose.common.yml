@@ -116,3 +116,5 @@ services:
       TZ: Asia/Tokyo
     tty: true
     restart: always
+  lemokon:
+    image: kyori/lemokon:latest-epgstation-discord
