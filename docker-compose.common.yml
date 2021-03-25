@@ -118,5 +118,7 @@ services:
     restart: always
   lemokon:
     image: kyori/lemokon:latest-epgstation-discord
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
     tty: true
     restart: always
