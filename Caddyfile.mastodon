@@ -12,7 +12,7 @@
 
   route {
     @streaming {
-      path /api/v1/streaming/*
+      path_regexp ^\/api\/v1\/streaming\/?$
     }
     @cache_control {
       path_regexp ^/(emoji|packs|/system/accounts/avatars|/system/media_attachments/files)
