@@ -21,7 +21,7 @@ services:
       MASTODON_DOMAIN: example.com
 
   mastodon-backup:
-    image: kyori/docker-mastodon-backup:psql-12.5-redis-4.0.9
+    image: kyori/docker-mastodon-backup:psql-13.3-redis-5.0.7
     tty: true
     restart: always
 
