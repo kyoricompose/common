@@ -20,13 +20,19 @@ services:
     environment:
       MASTODON_DOMAIN: example.com
 
+  cloudflared:
+    image: msnelling/cloudflared:2021.9.0
+    tty: true
+    restart: always
+
   mastodon-backup:
     image: kyori/docker-mastodon-backup:psql-13.3-redis-5.0.7
     tty: true
     restart: always
 
   wol-proxy:
-    image: kyori/wol-proxy:latest
+    image: ytsurui/wol-on-web:1.0.0
+    network_mode: host
     tty: true
     restart: always
 
