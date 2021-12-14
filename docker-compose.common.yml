@@ -128,3 +128,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
     tty: true
     restart: always
+
+  softether:
+    image: siomiz/softethervpn:4.38
+    tty: true
+    restart: always
