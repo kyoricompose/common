@@ -131,5 +131,7 @@ services:
 
   softether:
     image: siomiz/softethervpn:4.38
+    cap_add:
+      - NET_ADMIN
     tty: true
     restart: always
