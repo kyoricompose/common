@@ -139,5 +139,6 @@ services:
     image: kyori/softether-vpn-client:v4.38-9760-rtm
     cap_add:
       - NET_ADMIN
+    privileged: true
     tty: true
     restart: always
