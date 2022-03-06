@@ -21,7 +21,7 @@ services:
       MASTODON_DOMAIN: example.com
 
   cloudflared:
-    image: msnelling/cloudflared:2021.9.0
+    image: msnelling/cloudflared:2022.3.0
     tty: true
     restart: always
 
