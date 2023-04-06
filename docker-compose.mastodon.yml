@@ -6,6 +6,8 @@ services:
     command: bash -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000 -b '0.0.0.0'"
     tty: true
     restart: always
+    logging:
+      driver: local
   streaming:
     extends:
       file: ../docker-compose.common.yml
@@ -13,6 +15,8 @@ services:
     command: yarn start
     tty: true
     restart: always
+    logging:
+      driver: local
   sidekiq:
     extends:
       file: ../docker-compose.common.yml
@@ -22,3 +26,5 @@ services:
     command: sh -c "bundle exec sidekiq -c $${DB_POOL}"
     tty: true
     restart: always
+    logging:
+      driver: local

@@ -3,6 +3,8 @@ services:
     image: kyori/caddy-realip:latest
     tty: true
     restart: always
+    logging:
+      driver: local
   caddy-common:
     extends:
       service: caddy
@@ -24,17 +26,23 @@ services:
     image: msnelling/cloudflared:2022.3.0
     tty: true
     restart: always
+    logging:
+      driver: local
 
   mastodon-backup:
     image: kyori/docker-mastodon-backup:psql-13.3-redis-5.0.7
     tty: true
     restart: always
+    logging:
+      driver: local
 
   wol-proxy:
     image: ytsurui/wol-on-web:1.0.0
     network_mode: host
     tty: true
     restart: always
+    logging:
+      driver: local
 
   prometheus:
     image: prom/prometheus:v2.33.4
@@ -42,16 +50,22 @@ services:
       - /var/lib/prometheus:/prometheus
     tty: true
     restart: always
+    logging:
+      driver: local
   alertmanager:
     image: prom/alertmanager:v0.23.0
     volumes:
       - /var/lib/alertmanager:/alertmanager
     tty: true
     restart: always
+    logging:
+      driver: local
   alertmanager-discord:
     image: maxsuelmarinho/alertmanager-discord:latest
     tty: true
     restart: always
+    logging:
+      driver: local
   node-exporter:
     image: prom/node-exporter:v1.3.1
     volumes:
@@ -60,12 +74,16 @@ services:
     command: --path.rootfs=/host
     tty: true
     restart: always
+    logging:
+      driver: local
   blackbox-exporter:
     image: prom/blackbox-exporter:v0.19.0
     volumes:
       - ./blackbox_exporter.yml:/etc/blackbox_exporter/config.yml:ro
     tty: true
     restart: always
+    logging:
+      driver: local
   statsd-exporter:
     image: prom/statsd-exporter:v0.22.4
     volumes:
@@ -73,12 +91,16 @@ services:
     command: --statsd.mapping-config=/etc/statsd_exporter/mapping.yml
     tty: true
     restart: always
+    logging:
+      driver: local
   grafana:
     image: grafana/grafana:8.4.3
     volumes:
       - /var/lib/grafana:/var/lib/grafana
     tty: true
     restart: always
+    logging:
+      driver: local
 
   mysql:
     image: mariadb:10.5
@@ -89,6 +111,8 @@ services:
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --performance-schema=false --expire_logs_days=1
     tty: true
     restart: always
+    logging:
+      driver: local
 
   mirakurun:
     image: chinachu/mirakurun:latest
@@ -111,6 +135,8 @@ services:
     command: /bin/bash -c "ldconfig && ./docker/container-init.sh"
     tty: true
     restart: always
+    logging:
+      driver: local
   epgstation:
     image: kyori/epgstation:latest
     volumes:
@@ -122,12 +148,16 @@ services:
       TZ: Asia/Tokyo
     tty: true
     restart: always
+    logging:
+      driver: local
   lemokon:
     image: kyori/lemokon:latest-epgstation-discord
     volumes:
       - /etc/localtime:/etc/localtime:ro
     tty: true
     restart: always
+    logging:
+      driver: local
 
   softether:
     image: siomiz/softethervpn:4.38
@@ -135,6 +165,8 @@ services:
       - NET_ADMIN
     tty: true
     restart: always
+    logging:
+      driver: local
   softether-client:
     image: kyori/softether-vpn-client:v4.38-9760-rtm
     cap_add:
@@ -142,3 +174,5 @@ services:
     privileged: true
     tty: true
     restart: always
+    logging:
+      driver: local
