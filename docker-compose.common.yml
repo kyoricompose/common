@@ -23,7 +23,7 @@ services:
       MASTODON_DOMAIN: example.com
 
   cloudflared:
-    image: msnelling/cloudflared:2022.3.0
+    image: cloudflare/cloudflared:2023.7.3
     tty: true
     restart: always
     logging:
@@ -45,56 +45,23 @@ services:
       driver: local
 
   prometheus:
-    image: prom/prometheus:v2.33.4
+    image: prom/prometheus:v2.46.0
     volumes:
       - /var/lib/prometheus:/prometheus
     tty: true
     restart: always
     logging:
       driver: local
-  alertmanager:
-    image: prom/alertmanager:v0.23.0
-    volumes:
-      - /var/lib/alertmanager:/alertmanager
-    tty: true
-    restart: always
-    logging:
-      driver: local
-  alertmanager-discord:
-    image: maxsuelmarinho/alertmanager-discord:latest
-    tty: true
-    restart: always
-    logging:
-      driver: local
-  node-exporter:
-    image: prom/node-exporter:v1.3.1
-    volumes:
-      - '/:/host:ro,rslave'
-    pid: host
-    command: --path.rootfs=/host
-    tty: true
-    restart: always
-    logging:
-      driver: local
   blackbox-exporter:
-    image: prom/blackbox-exporter:v0.19.0
+    image: prom/blackbox-exporter:v0.24.0
     volumes:
       - ./blackbox_exporter.yml:/etc/blackbox_exporter/config.yml:ro
     tty: true
     restart: always
     logging:
       driver: local
-  statsd-exporter:
-    image: prom/statsd-exporter:v0.22.4
-    volumes:
-      - ./mastodon-statsd-mapping.yml:/etc/statsd_exporter/mapping.yml:ro
-    command: --statsd.mapping-config=/etc/statsd_exporter/mapping.yml
-    tty: true
-    restart: always
-    logging:
-      driver: local
   grafana:
-    image: grafana/grafana:8.4.3
+    image: grafana/grafana:10.0.3
     volumes:
       - /var/lib/grafana:/var/lib/grafana
     tty: true
